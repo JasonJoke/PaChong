@@ -78,7 +78,9 @@ if __name__ == "__main__":
         downloadfile(ftp, remote_path_0, local_path)
     ftp.quit()
     unzip(local_path, time)
-    os.system('dailyBuild.bat')
+    os.system('cd ' + time)
+    os.system('..\dailyBuild.bat')
+    os.system('cd ..')
     for i in range(2, 5):
         rm_time = (datetime.datetime.now()+datetime.timedelta(days=-i)).strftime("%Y-%m-%d")
         if os.path.exists(rm_time):

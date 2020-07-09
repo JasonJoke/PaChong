@@ -22,7 +22,7 @@ def ftpconnect(host, port, username, password):
         ftp.connect(host, port)
         ftp.login(username, password)
     except (socket.error, socket.gaierror):
-        print("ERROR: cannot connect [{}:{}]" .format(host, port))
+        print("ERROR: cannot connect [{}:{}]".format(host, port))
         return None
     except error_perm:
         print("ERROR: user Authentication failed")
@@ -38,6 +38,7 @@ def downloadfile(ftp, remotepath, localpath):
     bufsize = 1024
     with open(localpath, 'wb') as fp:
         ftp.retrbinary('RETR ' + remotepath, fp.write, bufsize)
+
 
 # 上传文件
 # def uploadfile(ftp, remotepath, localpath):
@@ -79,9 +80,9 @@ if __name__ == "__main__":
     ftp.quit()
     unzip(local_path, time)
     os.system('cd ' + time)
-    os.system('..\dailyBuild.bat')
+    # os.system('..\dailyBuild.bat')
     os.system('cd ..')
     for i in range(2, 5):
-        rm_time = (datetime.datetime.now()+datetime.timedelta(days=-i)).strftime("%Y-%m-%d")
+        rm_time = (datetime.datetime.now() + datetime.timedelta(days=-i)).strftime("%Y-%m-%d")
         if os.path.exists(rm_time):
             shutil.rmtree(rm_time)
